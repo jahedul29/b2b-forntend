@@ -1,0 +1,14 @@
+.auth_container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .auth_form_container{
+        border: 1px solid gray;
+        max-width: 550px;
+        min-width: 480px;
+        height: auto;
+    }
+}
