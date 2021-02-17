@@ -4,12 +4,21 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import Link from "next/link";
+import Head from "next/head";
 
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isForgetPassword, setIsForgetPassword] = useState(false);
-  const { register: registerLogin, handleSubmit: handleSubmitLogin, errors: errorsLogin } = useForm();
-  const { register: registerReset, handleSubmit: handleSubmitReset, errors: errorsReset } = useForm();
+  const {
+    register: registerLogin,
+    handleSubmit: handleSubmitLogin,
+    errors: errorsLogin,
+  } = useForm();
+  const {
+    register: registerReset,
+    handleSubmit: handleSubmitReset,
+    errors: errorsReset,
+  } = useForm();
 
   const handleForgetPassword = () => {
     setIsForgetPassword(!isForgetPassword);
@@ -18,18 +27,21 @@ const Login = () => {
   const onLoginFormSubmit = (data) => {
     console.log(data);
     console.log(errorsLogin);
-  }
+  };
 
   const onResetFormSubmit = (data) => {
     console.log(data);
     console.log(errorsReset);
-  }
+  };
 
   console.log(errorsLogin);
   console.log(errorsReset);
 
   return (
     <div className={loginStyle.auth_wrap}>
+      <Head>
+        <title>B2B-Login</title>
+      </Head>
       <div className={loginStyle.auth_container}>
         <div className={loginStyle.auth_header}>
           <h3 className={loginStyle.title}>B2B</h3>
@@ -58,24 +70,36 @@ const Login = () => {
               <Form.Group controlId="loginForm.email">
                 <Form.Label className="sr-only">Email</Form.Label>
                 <Form.Control
-                  ref={registerLogin({ required: {value: true, message: "Email is required"} })}
+                  ref={registerLogin({
+                    required: { value: true, message: "Email is required" },
+                  })}
                   type="email"
                   name="email"
                   placeholder="Email address"
                 />
-                {errorsLogin.email && <span className="text-danger">{errorsLogin.email.message}</span>}
+                {errorsLogin.email && (
+                  <span className="text-danger">
+                    {errorsLogin.email.message}
+                  </span>
+                )}
               </Form.Group>
-              
+
               <Form.Group controlId="loginForm.password">
                 <Form.Label className="sr-only">Password</Form.Label>
                 <Form.Control
-                  ref={registerLogin({ required: {value: true, message: "Password is required"} })}
+                  ref={registerLogin({
+                    required: { value: true, message: "Password is required" },
+                  })}
                   defaultValue=""
                   name={`password`}
                   type="password"
                   placeholder="Password"
                 />
-                {errorsLogin.password && <span className="text-danger">{errorsLogin.password.message}</span>}
+                {errorsLogin.password && (
+                  <span className="text-danger">
+                    {errorsLogin.password.message}
+                  </span>
+                )}
               </Form.Group>
               <span
                 onClick={handleForgetPassword}
@@ -97,14 +121,24 @@ const Login = () => {
               <Form.Group controlId="loginForm.email">
                 <Form.Label className="sr-only">Email</Form.Label>
                 <Form.Control
-                  ref={registerReset({ required: {value: true, message: "Email is required"} })}
+                  ref={registerReset({
+                    required: { value: true, message: "Email is required" },
+                  })}
                   type="email"
                   name="email"
                   placeholder="Enter your registered email address"
                 />
-                {errorsReset.email && <span className="text-danger">{errorsReset.email.message}</span>}
+                {errorsReset.email && (
+                  <span className="text-danger">
+                    {errorsReset.email.message}
+                  </span>
+                )}
               </Form.Group>
-              <Button type="submit" variant={isSubmitting ? "secondary" : "primary"} block>
+              <Button
+                type="submit"
+                variant={isSubmitting ? "secondary" : "primary"}
+                block
+              >
                 {isSubmitting ? "Submitting..." : "Reset Password"}
               </Button>
               <Button
